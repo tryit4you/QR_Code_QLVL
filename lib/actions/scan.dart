@@ -1,4 +1,3 @@
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 
 class ScanAction extends StatefulWidget {
@@ -30,7 +29,8 @@ class _ScanActionState extends State<ScanAction> {
             FlatButton(
               padding: EdgeInsets.all(15.0),
               onPressed: () async {
-                String codeSanner = await BarcodeScanner.scan();
+                String codeSanner = null;
+                //await BarcodeScanner.scan();
                 //barcode scnner
                 setState(() {
                   qrCodeResult = codeSanner;
