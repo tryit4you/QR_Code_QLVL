@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
+import 'package:qr_code_quanlyvattu/actions/scan.dart';
+
 //import 'package:cupertino_icons/cupertino_icons.dart';
 
 class HomeScreens extends StatefulWidget {
@@ -13,11 +14,7 @@ class _HomeScreensState extends State<HomeScreens> {
     Center(
       child: Text('Trang chủ'),
     ),
-    Center(
-        child: FlatButton(
-      child: Text('Quét mã'),
-      onPressed: _scan,
-    )),
+    ScanAction(),
     Center(
       child: Text('Danh sách kiểm kê'),
     ),
@@ -56,14 +53,5 @@ class _HomeScreensState extends State<HomeScreens> {
         },
       ),
     );
-  }
-}
-
-Future _scan() async {
-  String barcode = await scanner.scan();
-  if (barcode == null) {
-    //print('nothing return.');
-  } else {
-    //this._outputController.text = barcode;
   }
 }
