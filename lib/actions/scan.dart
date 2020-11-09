@@ -7,7 +7,6 @@ class ScanAction extends StatefulWidget {
 }
 
 class _ScanActionState extends State<ScanAction> {
-  String qrCodeResult = "Not Yet Scanned";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,11 +17,39 @@ class _ScanActionState extends State<ScanAction> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              child: Center(
-                child: Text('Quét mã vật tư'),
-              ),
-              decoration: BoxDecoration(
-               color: 
+              child: ListView(
+                physics: ClampingScrollPhysics(),
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: Container(
+                      child: Image.asset('assets/images/images_dien_luc.jpg',height: 150,),
+                      
+                    ),
+                    
+                  ),
+                  SizedBox(height: 10,),
+                  Container(child: Center(child: Text('Test'),),),
+
+                  Container(
+                    child: Row(
+                      children: [
+                        FlatButton(
+                          child: Text('Sync data'),
+                          onPressed: (){
+
+                          },
+                        ),
+                        FlatButton(
+                          child: Text('Scan QR'),
+                          onPressed: (){
+                            _scan(); 
+                          },
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
           ],
@@ -39,10 +66,4 @@ Future _scan() async {
   } else {
     //this._outputController.text = barcode;
   }
-}
-void main(List<String> args) {
-  var list=['apple','banana','bơ'];
-  list.forEach((item) {
-    print(item);
-  });
 }

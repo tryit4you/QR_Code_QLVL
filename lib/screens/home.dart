@@ -24,6 +24,7 @@ class _HomeScreensState extends State<HomeScreens> {
   ];
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -34,7 +35,7 @@ class _HomeScreensState extends State<HomeScreens> {
               title: Text('Trang chủ'),
               backgroundColor: Colors.blue),
           BottomNavigationBarItem(
-              icon: Icon(Icons.check),
+              icon: Icon(Icons.scanner),
               title: Text('Quét mã'),
               backgroundColor: Colors.red),
           BottomNavigationBarItem(

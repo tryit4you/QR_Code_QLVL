@@ -13,6 +13,9 @@ class QrScanApp extends StatefulWidget {
 
 class _QrScanAppState extends State<QrScanApp> {
   Widget build(BuildContext context) {
-    return HomeScreens();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomeScreens(),
+    );
   }
 }
