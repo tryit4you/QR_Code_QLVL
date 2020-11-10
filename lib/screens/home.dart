@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
 
-import '../actions/scan.dart';
 import '../actions/scan.dart';
 //import 'package:cupertino_icons/cupertino_icons.dart';
 
@@ -33,19 +31,19 @@ class _HomeScreensState extends State<HomeScreens> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              title: Text('Trang chủ'),
+              label: 'Trang chủ',
               backgroundColor: Colors.blue),
           BottomNavigationBarItem(
               icon: Icon(Icons.scanner_outlined),
-              title: Text('Quét mã'),
+              label: 'Quét mã',
               backgroundColor: Colors.red),
           BottomNavigationBarItem(
               icon: Icon(Icons.list),
-              title: Text('Danh sách'),
+              label: 'Danh sách',
               backgroundColor: Colors.cyan),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_box),
-              title: Text('Tài khoản'),
+              label: 'Tài khoản',
               backgroundColor: Colors.green)
         ],
         onTap: (index) {
