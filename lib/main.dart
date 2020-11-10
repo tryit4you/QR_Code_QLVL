@@ -15,6 +15,7 @@ class _QrScanAppState extends State<QrScanApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Qr_code_QLVT',
       home: HomeScreens(),
     );
   }
