@@ -15,19 +15,19 @@ class _BottomNavigationState extends State<BottomNavigation> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              title: Text('Trang chủ'),
+              label: 'Trang chủ',
               backgroundColor: Colors.blue),
           BottomNavigationBarItem(
               icon: Icon(Icons.check),
-              title: Text('Quét mã'),
+              label: 'Quét mã',
               backgroundColor: Colors.red),
           BottomNavigationBarItem(
               icon: Icon(Icons.list),
-              title: Text('Danh sách'),
+              label: 'Danh sách',
               backgroundColor: Colors.cyan),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_box),
-              title: Text('Tài khoản'),
+              label: 'Tài khoản',
               backgroundColor: Colors.green)
         ],
         onTap: (index) {
