@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_quanlyvattu/const/colors_const.dart';
 import 'package:qr_code_quanlyvattu/const/textstyle_const.dart';
 import 'package:qr_code_quanlyvattu/models/qr_code.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
 
 class ScanAction extends StatefulWidget {
   @override
@@ -60,9 +59,9 @@ class _ScanActionState extends State<ScanAction> {
                                 height: 50,
                                 width: 200,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(color: borderColor,width:1)
-                                ),
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(
+                                        color: borderColor, width: 1)),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -76,8 +75,10 @@ class _ScanActionState extends State<ScanAction> {
                                               fit: BoxFit.contain),
                                         )),
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           qrcodes[index].name,
@@ -106,12 +107,18 @@ class _ScanActionState extends State<ScanAction> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     FlatButton(
-                      child: Text('Sync data',style: TextStyle(color: Colors.white),),
+                      child: Text(
+                        'Sync data',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       color: Colors.blue,
                       onPressed: () {},
                     ),
                     FlatButton(
-                      child: Text('Scan QR',style: TextStyle(color: Colors.white),),
+                      child: Text(
+                        'Scan QR',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       color: Colors.blue,
                       onPressed: () {
                         _scan();
