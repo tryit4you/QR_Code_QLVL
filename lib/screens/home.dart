@@ -31,19 +31,19 @@ class _HomeScreensState extends State<HomeScreens> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Trang chủ',
+              title:Text('Trang chủ'),
               backgroundColor: Colors.blue),
           BottomNavigationBarItem(
-              icon: Icon(Icons.scanner_outlined),
-              label: 'Quét mã',
+              icon: Icon(Icons.code),
+               title:Text('Quét mã'),
               backgroundColor: Colors.red),
           BottomNavigationBarItem(
               icon: Icon(Icons.list),
-              label: 'Danh sách',
+               title:Text('Danh sách'),
               backgroundColor: Colors.cyan),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_box),
-              label: 'Tài khoản',
+               title:Text('Tài khoản'),
               backgroundColor: Colors.green)
         ],
         onTap: (index) {

@@ -20,6 +20,7 @@ class _QRViewCodeState extends State<QRViewCode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(elevation: 0,title: Text('Quét mã QR',style: TextStyle(color: Colors.white),),backgroundColor: Color.fromRGBO( 0,0,0,0.5),),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -36,87 +37,91 @@ class _QRViewCodeState extends State<QRViewCode> {
               ),
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Text(' $qrText'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: RaisedButton(
-                          onPressed: () {
-                            if (controller != null) {
-                              controller.toggleFlash();
-                              if (_isFlashOn(flashState)) {
-                                setState(() {
-                                  flashState = flashOff;
-                                });
-                              } else {
-                                setState(() {
-                                  flashState = flashOn;
-                                });
+          Container(
+              
+                      child: Expanded(
+              flex: 1,
+              child: FittedBox(
+                  
+                fit: BoxFit.contain,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text(' $qrText'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.all(8),
+                          child: RaisedButton(
+                            onPressed: () {
+                              if (controller != null) {
+                                controller.toggleFlash();
+                                if (_isFlashOn(flashState)) {
+                                  setState(() {
+                                    flashState = flashOff;
+                                  });
+                                } else {
+                                  setState(() {
+                                    flashState = flashOn;
+                                  });
+                                }
                               }
-                            }
-                          },
-                          child:
-                              Text(flashState, style: TextStyle(fontSize: 20)),
+                            },
+                            child:
+                                Text(flashState, style: TextStyle(fontSize: 20)),
+                          ),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: RaisedButton(
-                          onPressed: () {
-                            if (controller != null) {
-                              controller.flipCamera();
-                              if (_isBackCamera(cameraState)) {
-                                setState(() {
-                                  cameraState = frontCamera;
-                                });
-                              } else {
-                                setState(() {
-                                  cameraState = backCamera;
-                                });
+                        Container(
+                          margin: EdgeInsets.all(8),
+                          child: RaisedButton(
+                            onPressed: () {
+                              if (controller != null) {
+                                controller.flipCamera();
+                                if (_isBackCamera(cameraState)) {
+                                  setState(() {
+                                    cameraState = frontCamera;
+                                  });
+                                } else {
+                                  setState(() {
+                                    cameraState = backCamera;
+                                  });
+                                }
                               }
-                            }
-                          },
-                          child:
-                              Text(cameraState, style: TextStyle(fontSize: 20)),
+                            },
+                            child:
+                                Text(cameraState, style: TextStyle(fontSize: 20)),
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.all(8),
+                          child: RaisedButton(
+                            onPressed: () {
+                              controller?.pauseCamera();
+                            },
+                            child: Text('pause', style: TextStyle(fontSize: 20)),
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: RaisedButton(
-                          onPressed: () {
-                            controller?.pauseCamera();
-                          },
-                          child: Text('pause', style: TextStyle(fontSize: 20)),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: RaisedButton(
-                          onPressed: () {
-                            controller?.resumeCamera();
-                          },
-                          child: Text('resume', style: TextStyle(fontSize: 20)),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+                        Container(
+                          margin: EdgeInsets.all(8),
+                          child: RaisedButton(
+                            onPressed: () {
+                              controller?.resumeCamera();
+                            },
+                            child: Text('resume', style: TextStyle(fontSize: 20)),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           )

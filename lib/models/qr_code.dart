@@ -17,7 +17,7 @@ List<QrCode> qrcodes = qrcodetemp
 var qrcodetemp = [
   {
     'id': '1001',
-    'image': 'assets/images/qrcode.jpg',
+    'image': 'assets/images/qrcode.png',
     'name': 'PD01001',
     'scanTime': DateTime.now(),
     'state': true,
