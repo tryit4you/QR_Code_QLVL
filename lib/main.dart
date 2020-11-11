@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_quanlyvattu/screens/home.dart';
+import 'package:qr_code_quanlyvattu/screens/login.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -16,7 +17,8 @@ class _QrScanAppState extends State<QrScanApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Qr_code_QLVT',
-      home: HomeScreens(),
+      home: LoginScreen(),
+      //  home: HomeScreens(),
     );
   }
 }

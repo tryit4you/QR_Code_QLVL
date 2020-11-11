@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: "0.5.2"
   qr_code_scanner: ^0.0.13
   google_fonts: ^1.1.1
   cupertino_icons: ^1.0.0
