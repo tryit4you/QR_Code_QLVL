@@ -9,13 +9,29 @@ class LoginScreen extends StatefulWidget {
 var isRemember = true;
 
 class _LoginScreenState extends State<LoginScreen> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  void dispose() {
+    super.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+  }
+
   Widget buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5,
-        onPressed: () => print('Login press'),
+        onPressed: () {
+          if (_formKey.currentState.validate()) {
+            usernameController.clear();
+            passwordController.clear();
+            print('username:${usernameController.text}');
+            print('password:${passwordController.text}');
+          }
+        },
         padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -101,6 +117,106 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 
+  Widget buildForgotPassBtn() {
+    return Container(
+      alignment: Alignment.centerRight,
+      child: FlatButton(
+        onPressed: () => print("Forgot Password Pressed"),
+        padding: EdgeInsets.only(right: 0),
+        child: Text(
+          'Quên mật khẩu?',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  Widget buildUser() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Tên tài khoản',
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
+          height: 60,
+          child: TextFormField(
+            validator: (value) =>
+                value.isEmpty ? 'Yêu cầu nhập tên tài khoản' : null,
+            keyboardType: TextInputType.name,
+            style: TextStyle(color: Colors.black87),
+            controller: usernameController,
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14),
+                prefixIcon: Icon(
+                  Icons.account_circle,
+                  color: Color(0xff5ac18e),
+                ),
+                hintText: 'Tài Khoản',
+                hintStyle: TextStyle(color: Colors.black38)),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget buildPassword() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Mật khẩu',
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
+          height: 60,
+          child: TextFormField(
+            validator: (value) =>
+                value.isEmpty ? 'Yêu cầu nhập mật khẩu' : null,
+            controller: passwordController,
+            obscureText: true,
+            style: TextStyle(color: Colors.black87),
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14),
+                prefixIcon: Icon(
+                  Icons.lock,
+                  color: Color(0xff5ac18e),
+                ),
+                hintText: 'Mật khẩu',
+                hintStyle: TextStyle(color: Colors.black38)),
+          ),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,14 +254,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 50,
                       ),
-                      buildUser(),
-                      SizedBox(
-                        height: 20,
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            buildUser(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            buildPassword(),
+                            buildRememberCb(),
+                            buildLoginBtn(),
+                            buildSignUpBtn()
+                          ],
+                        ),
                       ),
-                      buildPassword(),
-                      buildRememberCb(),
-                      buildLoginBtn(),
-                      buildSignUpBtn()
                     ],
                   ),
                 ),
@@ -156,98 +279,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-}
-
-Widget buildForgotPassBtn() {
-  return Container(
-    alignment: Alignment.centerRight,
-    child: FlatButton(
-      onPressed: () => print("Forgot Password Pressed"),
-      padding: EdgeInsets.only(right: 0),
-      child: Text(
-        'Quên mật khẩu?',
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-    ),
-  );
-}
-
-Widget buildUser() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Tên tài khoản',
-        style: TextStyle(
-            color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-      ),
-      SizedBox(
-        height: 10,
-      ),
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
-            ]),
-        height: 60,
-        child: TextField(
-          keyboardType: TextInputType.name,
-          style: TextStyle(color: Colors.black87),
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(
-                Icons.account_circle,
-                color: Color(0xff5ac18e),
-              ),
-              hintText: 'Tài Khoản',
-              hintStyle: TextStyle(color: Colors.black38)),
-        ),
-      )
-    ],
-  );
-}
-
-Widget buildPassword() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Mật khẩu',
-        style: TextStyle(
-            color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-      ),
-      SizedBox(
-        height: 10,
-      ),
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
-            ]),
-        height: 60,
-        child: TextField(
-          obscureText: true,
-          style: TextStyle(color: Colors.black87),
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Color(0xff5ac18e),
-              ),
-              hintText: 'Mật khẩu',
-              hintStyle: TextStyle(color: Colors.black38)),
-        ),
-      )
-    ],
-  );
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_quanlyvattu/const/colors_const.dart';
 import 'package:qr_code_quanlyvattu/const/textstyle_const.dart';
-import 'package:qr_code_quanlyvattu/models/qr_code.dart';
+import 'package:qr_code_quanlyvattu/models/qrcode_model.dart';
 import 'package:qr_code_quanlyvattu/screens/widgets/qr_code_scan_widget.dart';
 
 class ScanAction extends StatefulWidget {
