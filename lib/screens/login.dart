@@ -1,5 +1,11 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:qr_code_quanlyvattu/models/user_model.dart';
+import 'package:qr_code_quanlyvattu/screens/widgets/common.dart';
+import 'package:qr_code_quanlyvattu/services/authService/auth_porvider.dart';
+import 'package:qr_code_quanlyvattu/services/authService/user_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -18,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
   }
 
-  Widget buildLoginBtn() {
+  Widget buildLoginBtn({AuthProvider auth}) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
@@ -26,10 +32,28 @@ class _LoginScreenState extends State<LoginScreen> {
         elevation: 5,
         onPressed: () {
           if (_formKey.currentState.validate()) {
+            _formKey.currentState.save();
+            final Future<Map<String, dynamic>> result =
+                auth.login(usernameController.text, passwordController.text);
+            result.then((response) {
+              if (response['status']) {
+                UserModel user = response['user'];
+                Provider.of<UserProvider>(context, listen: false).setUser(user);
+                Navigator.pushReplacementNamed(context, '/home');
+              } else {
+                Flushbar(
+                  title: "Failed Login",
+                  message: response['message']['message'].toString(),
+                  duration: Duration(seconds: 3),
+                ).show(context);
+              }
+            });
             usernameController.clear();
             passwordController.clear();
             print('username:${usernameController.text}');
             print('password:${passwordController.text}');
+          } else {
+            print('Form is invalid');
           }
         },
         padding: EdgeInsets.all(15),
@@ -219,6 +243,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //khoi tao provider authentication
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+//
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -264,11 +291,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             buildPassword(),
                             buildRememberCb(),
-                            buildLoginBtn(),
-                            buildSignUpBtn()
+                            buildLoginBtn(auth: auth),
+                            buildSignUpBtn(),
                           ],
                         ),
                       ),
+                      CommonWidget.onLoading
                     ],
                   ),
                 ),

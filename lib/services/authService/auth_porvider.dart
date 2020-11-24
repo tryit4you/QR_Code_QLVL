@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:qr_code_quanlyvattu/models/user_model.dart';
 import 'package:qr_code_quanlyvattu/services/apiService/appUrl.dart';
 import 'package:qr_code_quanlyvattu/services/authService/auth_status.dart';
+import 'package:qr_code_quanlyvattu/shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
   Status _loggedInStatus = Status.NotLogedIn;
@@ -31,7 +32,7 @@ class AuthProvider with ChangeNotifier {
 
       UserModel authUser = UserModel.fromJson(userData);
 
-      //UserPreferences.saveUser(authUser);
+      UserPreferences().saveUser(authUser);
       _loggedInStatus = Status.LoggedIn;
       notifyListeners();
       result = {'status': true, 'message': 'Successful', 'user': authUser};
@@ -72,7 +73,7 @@ class AuthProvider with ChangeNotifier {
       var userData = responseData['data'];
       UserModel authUser = UserModel.fromJson(userData);
 
-      //UserPreferences().saveUser(authUser);
+      UserPreferences().saveUser(authUser);
 
       result = {
         'status': true,

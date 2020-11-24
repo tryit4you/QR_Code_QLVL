@@ -37,4 +37,10 @@ class UserPreferences {
     prefs.remove('renewalToken');
     prefs.remove('type');
   }
+
+  Future<String> getToken(args) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.get('token');
+    return token;
+  }
 }
